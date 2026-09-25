@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "faceblast"
+version = "0.1.0"
+description = "Ultra-fast, lightweight face detection and recognition using ONNX without dlib or heavy PyTorch"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "jimmiy", email = "jimi18102010@gmail.com" }
+]
+urls = { "Homepage" = "https://github.com/jimi18102010-commits/faceblast", "Bug Tracker" = "https://github.com/jimi18102010-commits/faceblast/issues" }
+keywords = ["face-recognition", "face-detection", "onnx", "opencv", "computer-vision"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Utilities"
+]
+dependencies = [
+    "opencv-python-headless>=4.8.0",
+    "numpy>=1.24.0",
+    "pillow>=9.5.0",
+    "rich>=13.7.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0"
+]
+
+[project.scripts]
+faceblast = "faceblast.cli:main"
