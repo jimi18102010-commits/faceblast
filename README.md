@@ -5,7 +5,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-jimi18102010--commits-181717?logo=github)](https://github.com/jimi18102010-commits/faceblast)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/Tests-5%2F5%20Passing-brightgreen.svg)]()
+[![CI Tests](https://github.com/jimi18102010-commits/faceblast/actions/workflows/test.yml/badge.svg)](https://github.com/jimi18102010-commits/faceblast/actions/workflows/test.yml)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)]()
 
 **Ultra-fast, lightweight face detection and recognition using ONNX.**  
