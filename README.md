@@ -29,24 +29,18 @@
 
 ---
 
-## 🚀 Why FaceBlast?
+## Implementation and limits
 
-For years, developers have struggled with two extremes in Python face recognition:
-1. **`face_recognition` (53k ⭐):** Relies on `dlib`, which requires `CMake` and a C++ compiler to install. Fails frequently on Linux, macOS (Apple Silicon M1/M2/M3), and inside minimal Docker containers.
-2. **`DeepFace` (~15k ⭐):** Pulls in `TensorFlow` or `PyTorch`, causing **2+ GB** package downloads, 10-second cold starts, and 1.5 GB memory footprints.
+FaceBlast uses OpenCV's YuNet and SFace APIs to load ONNX model files.
+It does **not** use the separate ONNX Runtime package, dlib, PyTorch or TensorFlow.
+Models are pinned to an OpenCV Zoo commit and verified with SHA-256, including cached copies.
+The first use downloads model weights; latency and RAM depend on hardware and image size.
+No universal performance benchmark is claimed.
 
-**FaceBlast strikes the sweet spot:**
-
-| Feature | `face_recognition` (dlib) | `DeepFace` | **FaceBlast** ⚡ |
-| :--- | :---: | :---: | :---: |
-| **Installation** | ❌ Requires C++ & CMake | ⚠️ 2+ GB package bloat | ✅ **Pure wheel (`pip install`)** |
-| **Under the Hood** | Outdated `dlib` (2020) | Heavy PyTorch / TF | ✅ **Fast ONNX (YuNet + SFace)** |
-| **Startup Time** | ~400 ms | 8,000 - 15,000 ms | ✅ **~50 ms (Instant)** |
-| **RAM Footprint** | ~200 MB | ~1,500 MB | ✅ **< 100 MB** |
-| **Facial Landmarks** | 68 (Slow) | Varies | ✅ **5 key points (Instant)** |
-| **Interactive CLI** | Basic | No | ✅ **Rich terminal UI & tables** |
-
----
+Similarity is not identity proof or a calibrated probability. Obtain consent for biometric
+processing and do not use this package alone for high-stakes authentication or identification.
+The functional API caches detector/recognizer instances; use separate processes or external
+serialization when sharing them between concurrent workers.
 
 ## 📦 Installation
 
@@ -55,7 +49,7 @@ git clone https://github.com/jimi18102010-commits/faceblast.git
 cd faceblast
 
 # Setup virtual environment
-uv venv .venv --python 3.12
+python3 -m venv .venv
 source .venv/bin/activate       # Bash / Zsh
 # OR for Fish Shell (CachyOS / Arch):
 # source .venv/bin/activate.fish

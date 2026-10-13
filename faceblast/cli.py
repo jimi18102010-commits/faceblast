@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from types import SimpleNamespace
 from rich.prompt import Prompt
 
 from faceblast import __version__
@@ -45,7 +46,7 @@ def handle_compare(args):
     with console.status("[bold cyan]Analyzing & comparing faces..."):
         result = compare_faces(args.image1, args.image2, threshold=args.threshold)
 
-    print_match_result(result, os.path.basename(args.image1), os.path.basename(args.image2))
+    print_match_result(result, os.path.basename(args.image1), os.path.basename(args.image2), threshold=args.threshold)
 
 
 def handle_interactive():
@@ -60,20 +61,11 @@ def handle_interactive():
     if choice == "1":
         img1 = Prompt.ask("Path to Photo 1").strip(" '\"")
         img2 = Prompt.ask("Path to Photo 2").strip(" '\"")
-        class FakeArgs:
-            image1 = img1
-            image2 = img2
-            threshold = 0.363
-        handle_compare(FakeArgs())
+        handle_compare(SimpleNamespace(image1=img1, image2=img2, threshold=0.363))
     elif choice == "2":
         img = Prompt.ask("Path to Photo").strip(" '\"")
         draw = Prompt.ask("Save annotated image with boxes?", choices=["y", "n"], default="y")
-        class FakeArgs:
-            image = img
-            threshold = 0.6
-            output = None
-            draw = (draw == "y")
-        handle_detect(FakeArgs())
+        handle_detect(SimpleNamespace(image=img, threshold=0.6, output=None, draw=(draw == "y")))
 
 
 def main():

@@ -2,7 +2,7 @@
 
 **FaceBlast** — это сверхбыстрая и легковесная Python-библиотека и CLI-утилита для распознавания и обнаружения лиц на базе ONNX (YuNet + SFace).
 
-Она создана как прямая замена устаревшей библиотеке `face_recognition` (dlib) и тяжелому `DeepFace`.
+Это экспериментальный инструмент; сходство не является доказательством личности. Используйте изображения с согласия людей.
 
 ---
 
@@ -10,7 +10,8 @@
 
 * **Никаких компиляторов C++ (CMake):** Устанавливается через обычный `pip install` за пару секунд.
 * **Никакого тяжелого PyTorch/TensorFlow:** Библиотека не выкачивает 2 ГБ лишних пакетов.
-* **Старт за 0.05 секунды:** Идеально подходит для ботов, скриптов, веб-камер и слабых серверов.
+* Модели ONNX загружаются через OpenCV, закреплены за commit и проверяются SHA-256.
+* Скорость и RAM зависят от оборудования и изображения; универсального бенчмарка нет.
 
 ---
 
@@ -21,9 +22,9 @@
 ```bash
 git clone https://github.com/jimi18102010-commits/faceblast.git
 cd faceblast
-uv venv .venv --python 3.12
-source .venv/bin/activate.fish   # для Fish Shell в CachyOS
-uv pip install -e .
+python3 -m venv .venv
+source .venv/bin/activate       # Bash/Zsh в Ubuntu/Debian
+pip install -e .
 ```
 
 ---
