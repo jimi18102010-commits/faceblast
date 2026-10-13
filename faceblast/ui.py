@@ -48,7 +48,7 @@ def print_detection_results(faces: List[Face], image_path: str):
     console.print(table)
 
 
-def print_match_result(result: MatchResult, img1_name: str, img2_name: str):
+def print_match_result(result: MatchResult, img1_name: str, img2_name: str, threshold: float = 0.363):
     """Prints a styled panel comparing two faces."""
     if not result.face1_detected:
         console.print(f"[bold red]✘ Could not detect any face in:[/bold red] {img1_name}")
@@ -62,7 +62,7 @@ def print_match_result(result: MatchResult, img1_name: str, img2_name: str):
         content = (
             f"[bold green]✔ SAME PERSON (MATCH)[/bold green]\n\n"
             f"• [bold]Similarity:[/bold] {result.similarity:.4f} ({score_pct:.1f}%)\n"
-            f"• [bold]Threshold:[/bold] ≥ 0.3630\n"
+            f"• [bold]Threshold:[/bold] ≥ {threshold:.4f}\n"
             f"• [bold]L2 Distance:[/bold] {result.distance_l2:.3f}"
         )
         border = "green"
@@ -70,7 +70,7 @@ def print_match_result(result: MatchResult, img1_name: str, img2_name: str):
         content = (
             f"[bold red]✘ DIFFERENT PERSONS (NO MATCH)[/bold red]\n\n"
             f"• [bold]Similarity:[/bold] {result.similarity:.4f} ({score_pct:.1f}%)\n"
-            f"• [bold]Threshold:[/bold] < 0.3630\n"
+            f"• [bold]Threshold:[/bold] < {threshold:.4f}\n"
             f"• [bold]L2 Distance:[/bold] {result.distance_l2:.3f}"
         )
         border = "red"
